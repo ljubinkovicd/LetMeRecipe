@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
-
+    
+    final let APP_ID = "ae3627c5"
+    final let APP_KEY = "db8fa6e8466d85b879d51866201bd0b8"
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let userInput = "chicken"
+        let myRequest = "https://api.edamam.com/search?q=\(userInput)&app_id=\(APP_ID)&app_key=\(APP_KEY)"
+        
+        Alamofire.request(myRequest).responseObject { (response: DataResponse<RecipeList>) in
+            
+            print("\(response.result.value!)")
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
 }
 

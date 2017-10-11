@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 
 class SearchViewController: UIViewController {
     
@@ -18,7 +19,7 @@ class SearchViewController: UIViewController {
     final let APP_KEY = "db8fa6e8466d85b879d51866201bd0b8"
     
     var searchResults: [String] = []
-    var searchImages: [UIImage] = []
+    var searchImageUrls: [String] = []
     
     override func viewDidLoad() {
         
@@ -26,9 +27,9 @@ class SearchViewController: UIViewController {
         // This tells the table view to add a 56-point margin at the top, made up of 20 points for the status bar and 44 points for the Search Bar.
         collectionView.contentInset = UIEdgeInsetsMake(56, 0, 0, 0)
         
-//        let width = (collectionView!.frame.width / 3) - 5
-//        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-//        layout.itemSize = CGSize(width: width, height: 200)
+        //        let width = (collectionView!.frame.width / 3) - 5
+        //        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        //        layout.itemSize = CGSize(width: width, height: 200)
     }
     
     
@@ -77,12 +78,13 @@ extension SearchViewController: UISearchBarDelegate {
         Alamofire.request(myRequest).responseObject { (response: DataResponse<RecipeList>) in
             
             self.searchResults = []
-            self.searchImages = []
+            self.searchImageUrls = []
             
             if let recipes = response.result.value {
                 
                 for i in 0..<recipes.recipeMetaData.count {
                     self.searchResults.append(recipes.recipeMetaData[i].recipe.title)
+                    self.searchImageUrls.append(recipes.recipeMetaData[i].recipe.mealImgUrl)
                 }
             }
             
@@ -108,6 +110,54 @@ extension SearchViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCell", for: indexPath) as! RecipeCell
         
         cell.recipeTitleLabel.text = searchResults[indexPath.row]
+        cell.recipeImageView.layer.cornerRadius = 20.0
+        cell.recipeImageView.layer.masksToBounds = true
+
+        Alamofire.request(searchImageUrls[indexPath.row]).responseImage(completionHandler: { [weak self] imgResponse in
+            
+//            let url = URL(string: (strongSelf.searchImageUrls[indexPath.row]))
+//            myCell.recipeImageView.af_setImage(withURL: url!)
+            
+            let url = URL(string: (self?.searchImageUrls[indexPath.row])!)
+            let placeholderImage = UIImage(named: "placeholderImg")
+            
+            let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+                size: cell.recipeImageView.frame.size,
+                radius: 20.0
+            )
+            
+            cell.recipeImageView.af_setImage(
+                withURL: url!,
+                placeholderImage: placeholderImage,
+                filter: filter,
+                imageTransition: .flipFromTop(0.8)
+            )
+            
+//            DispatchQueue.main.async {
+//                if let strongSelf = self {
+//                    if let myCell = strongSelf.collectionView.cellForItem(at: indexPath) as? RecipeCell {
+//                        let url = URL(string: (strongSelf.searchImageUrls[indexPath.row]))
+//                        myCell.recipeImageView.af_setImage(withURL: url!)
+//                    }
+//                }
+//            }
+            
+//            if let image = imgResponse.result.value {
+//                print("Image downloaded: \(image)")
+//                DispatchQueue.main.async {
+//
+//
+//
+//                    cell.recipeImageView.image = roundedImage
+//
+//                    //                    if let strongSelf = self {
+//                    //                        if let myCell = strongSelf.collectionView.cellForItem(at: indexPath) as? RecipeCell {
+//                    //                            myCell.recipeImageView.image = image
+//                    //                        }
+//                    //                    }
+//                }
+//            }
+        })
         
         return cell
     }

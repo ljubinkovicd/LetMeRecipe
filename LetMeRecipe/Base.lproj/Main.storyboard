@@ -20,7 +20,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0y3-Sv-JJe">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nFv-wd-gfA">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="3" id="nFv-wd-gfA">
                                     <size key="itemSize" width="200" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -35,27 +35,27 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="qpF-Eq-Ls4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="166"/>
+                                                    <rect key="frame" x="5" y="5" width="190" height="166"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="166" id="X9y-b5-c1C"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFu-gs-tp9">
-                                                    <rect key="frame" x="0.0" y="172" width="200" height="21"/>
+                                                    <rect key="frame" x="0.0" y="177" width="200" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="UFu-gs-tp9" firstAttribute="leading" secondItem="xEu-cf-ez8" secondAttribute="leading" id="0I3-4X-Ewv"/>
-                                            <constraint firstAttribute="trailing" secondItem="qpF-Eq-Ls4" secondAttribute="trailing" id="28e-l8-eS0"/>
+                                            <constraint firstAttribute="trailing" secondItem="qpF-Eq-Ls4" secondAttribute="trailing" constant="5" id="28e-l8-eS0"/>
                                             <constraint firstItem="UFu-gs-tp9" firstAttribute="top" secondItem="qpF-Eq-Ls4" secondAttribute="bottom" constant="6" id="3VW-Cc-jhy"/>
                                             <constraint firstAttribute="trailing" secondItem="UFu-gs-tp9" secondAttribute="trailing" id="LDK-Ne-x43"/>
-                                            <constraint firstItem="qpF-Eq-Ls4" firstAttribute="leading" secondItem="xEu-cf-ez8" secondAttribute="leading" id="a3b-o7-Md0"/>
+                                            <constraint firstItem="qpF-Eq-Ls4" firstAttribute="leading" secondItem="xEu-cf-ez8" secondAttribute="leading" constant="5" id="a3b-o7-Md0"/>
                                             <constraint firstItem="UFu-gs-tp9" firstAttribute="top" secondItem="qpF-Eq-Ls4" secondAttribute="bottom" constant="6" id="bxK-C5-7rk"/>
-                                            <constraint firstItem="qpF-Eq-Ls4" firstAttribute="top" secondItem="xEu-cf-ez8" secondAttribute="top" id="uLB-gL-QJ7"/>
+                                            <constraint firstItem="qpF-Eq-Ls4" firstAttribute="top" secondItem="xEu-cf-ez8" secondAttribute="top" constant="5" id="uLB-gL-QJ7"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="recipeImageView" destination="qpF-Eq-Ls4" id="d9M-rl-myx"/>

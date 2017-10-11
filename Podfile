@@ -6,7 +6,8 @@ target 'LetMeRecipe' do
   use_frameworks!
 
   # Pods for LetMeRecipe
-  pod 'Alamofire', '~> 4.5'  
+  pod 'Alamofire', '~> 4.5'
+  pod 'AlamofireImage', '~> 3.3'
 
   target 'LetMeRecipeTests' do
     inherit! :search_paths

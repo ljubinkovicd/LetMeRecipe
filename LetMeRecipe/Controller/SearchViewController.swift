@@ -49,13 +49,22 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         // TODO: Change this
         // This tells the table view to add a 56-point margin at the top, made up of 20 points for the status bar and 44 points for the Search Bar.
-        collectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0)
+        collectionView.backgroundColor = .clear
+        collectionView.contentInset = UIEdgeInsetsMake(100, 16, 10, 16)
+        
+        searchBar.showsBookmarkButton = true
+//        searchBar.backgroundImage = UIImage(named: "filter")
+        let bookmarkImage = UIImage(named: "filter")
+        searchBar.setImage(bookmarkImage, for: .bookmark, state: UIControlState())
+        
+        searchBar.barTintColor = UIColor.black
+        searchBar.backgroundColor = UIColor.black
         
         searchBar.becomeFirstResponder()
         
-        let width = (collectionView!.frame.width / 2) - 5
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: 200)
+//        let width = (collectionView!.frame.width / 2)
+//        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+//        layout.itemSize = CGSize(width: width, height: 200)
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
@@ -147,6 +156,23 @@ extension SearchViewController: UISearchBarDelegate {
         performSearch()
     }
     
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        print(123)
+        
+        // Bring up the selection menu
+        let menuItem = UIMenuItem(title: "CUSTOM", action: #selector(doSmt))
+        let menuController = UIMenuController.shared
+        let selectionRect = CGRect(x: 300, y: 0, width: 200, height: 100)
+        menuController.setTargetRect(selectionRect, in: self.view)
+        menuController.arrowDirection = .up
+        menuController.menuItems = [menuItem]
+        menuController.setMenuVisible(true, animated: true)
+    }
+    
+    @objc func doSmt() {
+        print(567)
+    }
+    
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
     }
@@ -214,9 +240,13 @@ extension SearchViewController: UICollectionViewDataSource {
             cell.isUserInteractionEnabled = false
             
             cell.recipeTitleLabel!.text = "Nothing Found..."
-            cell.recipeImageView.image = placeholderImage
-            cell.recipeImageView.layer.cornerRadius = 20.0
-            cell.recipeImageView.layer.masksToBounds = true
+            cell.recipeTitleLabel.text = "No Title"
+            cell.numberOfCaloriesLabel.text = "0"
+            cell.numberOfIngredientsLabel.text = "0"
+            cell.recipeSourceLabel.text = "No Source"
+//            cell.recipeImageView.image = placeholderImage
+//            cell.recipeImageView.layer.cornerRadius = 8.0
+//            cell.recipeImageView.layer.masksToBounds = true
             
             print(cell.recipeTitleLabel!.text)
         } else {
@@ -224,8 +254,11 @@ extension SearchViewController: UICollectionViewDataSource {
             
             let recipe = searchRecipeResults[indexPath.row]
             
-            cell.recipeTitleLabel.text = recipe.calories.description
-            cell.recipeImageView.layer.cornerRadius = 20.0
+            cell.recipeTitleLabel.text = recipe.title
+            cell.numberOfCaloriesLabel.text = String(format: "%.0f", recipe.calories)
+            cell.numberOfIngredientsLabel.text = String(format: "%d", recipe.ingredients.count)
+            cell.recipeSourceLabel.text = recipe.source
+            cell.recipeImageView.layer.cornerRadius = 8.0
             cell.recipeImageView.layer.masksToBounds = true
             
             let recipeImgUrl = recipe.mealImgUrl
@@ -236,7 +269,7 @@ extension SearchViewController: UICollectionViewDataSource {
                 
                 let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
                     size: cell.recipeImageView.frame.size,
-                    radius: 20.0
+                    radius: 8.0
                 )
                 
                 cell.recipeImageView.af_setImage(
@@ -276,7 +309,11 @@ extension SearchViewController: UICollectionViewDataSource {
     }
 }
 
-extension SearchViewController: UICollectionViewDelegate {
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 5)) / 2
+        return CGSize(width: itemSize, height: itemSize)
+    }
 }
 

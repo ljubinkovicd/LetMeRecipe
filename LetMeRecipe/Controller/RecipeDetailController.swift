@@ -10,15 +10,18 @@ import UIKit
 
 class RecipeDetailController: UIViewController {
     
+    @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var recipeDetailsLabel: UITextView!
     
     var recipe: Recipe? = nil
+    var recipeImg: UIImage? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let recipe = recipe {
             recipeDetailsLabel.text = recipe.ingredients.description
+            recipeImageView.image = recipeImg
         }
     }
     

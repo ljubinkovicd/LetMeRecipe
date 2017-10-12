@@ -53,9 +53,9 @@ class SearchViewController: UIViewController {
         
         searchBar.becomeFirstResponder()
         
-        //        let width = (collectionView!.frame.width / 3) - 5
-        //        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        //        layout.itemSize = CGSize(width: width, height: 200)
+        let width = (collectionView!.frame.width / 2) - 5
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: 200)
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
@@ -81,10 +81,10 @@ class SearchViewController: UIViewController {
     func edamamURL(searchText: String, category: Int) -> URL {
         let dietType: String
         switch category {
-            case 1: dietType = "high-fiber"
-            case 2: dietType = "low-fat"
-            case 3: dietType = "low-carb"
-            default: dietType = "high-protein"
+        case 1: dietType = "high-fiber"
+        case 2: dietType = "low-fat"
+        case 3: dietType = "low-carb"
+        default: dietType = "high-protein"
         }
         
         let escapedSearchText = searchText.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
@@ -143,7 +143,7 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    
+        
         performSearch()
     }
     
@@ -162,7 +162,7 @@ extension SearchViewController: UISearchBarDelegate {
             // No longer listen to keyboard input
             searchBar.resignFirstResponder()
             
-//            let myRequest = "https://api.edamam.com/search?q=\(searchBar.text!)&app_id=\(ApiKeys.appId)&app_key=\(ApiKeys.appKey)"
+            //            let myRequest = "https://api.edamam.com/search?q=\(searchBar.text!)&app_id=\(ApiKeys.appId)&app_key=\(ApiKeys.appKey)"
             let myRequest = edamamURL(searchText: searchBar.text!, category: segmentedControl.selectedSegmentIndex)
             
             print(myRequest)
@@ -260,8 +260,8 @@ extension SearchViewController: UICollectionViewDataSource {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-//        let myVc = segue.destination as! UINavigationController
-//        let vc = myVc.topViewController as! RecipeDetailController
+        //        let myVc = segue.destination as! UINavigationController
+        //        let vc = myVc.topViewController as! RecipeDetailController
         
         let vc = segue.destination as! RecipeDetailController
         
@@ -271,6 +271,7 @@ extension SearchViewController: UICollectionViewDataSource {
             let recipe = self.searchRecipeResults[indexPath.row]
             
             vc.recipe = recipe
+            vc.recipeImg = cell.recipeImageView.image
         }
     }
 }

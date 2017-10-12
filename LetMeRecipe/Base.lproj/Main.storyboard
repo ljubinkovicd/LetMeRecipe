@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XXn-Qy-zVQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,7 +22,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RA1-cz-KoX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2873" y="-15"/>
+            <point key="canvasLocation" x="3270" y="-15.845070422535212"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -75,7 +75,7 @@
                                         <connections>
                                             <outlet property="recipeImageView" destination="qpF-Eq-Ls4" id="d9M-rl-myx"/>
                                             <outlet property="recipeTitleLabel" destination="UFu-gs-tp9" id="nux-Tg-N9u"/>
-                                            <segue destination="2vQ-mB-3LA" kind="show" identifier="toRecipeDetailSegue" id="TtC-oS-2zE"/>
+                                            <segue destination="GC5-mC-il8" kind="show" id="pzH-Id-L4i"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -92,33 +92,60 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="rdE-o8-GYb"/>
                                 </connections>
                             </searchBar>
-                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="tUp-Hl-sJE">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f1I-nm-Isr">
+                                <rect key="frame" x="0.0" y="76" width="320" height="44"/>
+                                <items>
+                                    <navigationItem id="aod-fU-1Jr">
+                                        <nil key="title"/>
+                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="sec-nY-VlO">
+                                            <rect key="frame" x="10" y="7" width="300" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Protein"/>
+                                                <segment title="Fiber"/>
+                                                <segment title="Lowfat"/>
+                                                <segment title="Lowcarb"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="zpy-E6-nMx"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="tUp-Hl-sJE">
                                 <rect key="frame" x="142" y="266" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="f1I-nm-Isr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0HO-ax-tbN"/>
+                            <constraint firstItem="f1I-nm-Isr" firstAttribute="top" secondItem="8xq-d6-v05" secondAttribute="bottom" id="Ivc-uW-19T"/>
                             <constraint firstItem="0y3-Sv-JJe" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="R0Q-m4-LV4"/>
                             <constraint firstItem="8xq-d6-v05" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="VY7-8P-UtN"/>
                             <constraint firstItem="0y3-Sv-JJe" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="YNd-cL-a9X"/>
                             <constraint firstItem="0y3-Sv-JJe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="abg-fv-J7K"/>
                             <constraint firstItem="8xq-d6-v05" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="g7l-xU-dUJ"/>
+                            <constraint firstItem="tUp-Hl-sJE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qJA-Aa-bqJ"/>
+                            <constraint firstItem="f1I-nm-Isr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="t9N-NB-hgU"/>
+                            <constraint firstItem="tUp-Hl-sJE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vI0-qj-6Fu"/>
                             <constraint firstItem="0y3-Sv-JJe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xoE-d4-RQS"/>
                             <constraint firstItem="8xq-d6-v05" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="z3c-7t-e3J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="KKs-o2-Ikx"/>
                     <connections>
                         <outlet property="collectionView" destination="0y3-Sv-JJe" id="wLK-rA-Sqj"/>
                         <outlet property="loadingActivityIndicator" destination="tUp-Hl-sJE" id="hVJ-3X-QFZ"/>
                         <outlet property="searchBar" destination="8xq-d6-v05" id="k3U-3m-BBx"/>
+                        <outlet property="segmentedControl" destination="sec-nY-VlO" id="JbD-7b-WFw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135" y="-13.732394366197184"/>
+            <point key="canvasLocation" x="1176" y="-16"/>
         </scene>
         <!--Recipe Detail Controller-->
         <scene sceneID="PkC-aX-zYu">
@@ -156,25 +183,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s7K-I8-EaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1966.875" y="-14.788732394366198"/>
+            <point key="canvasLocation" x="2364.375" y="-14.788732394366198"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="EVh-WV-Jt4">
+        <scene sceneID="oIA-uY-NI1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2vQ-mB-3LA" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XXn-Qy-zVQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DLo-Ur-cS8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ep6-l1-ugL">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="GC5-mC-il8" kind="relationship" relationship="rootViewController" id="DbQ-s2-MAi"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4e0-9X-7a2"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cpS-U7-Ze8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rs7-Ch-23M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1040.625" y="-14.788732394366198"/>
+            <point key="canvasLocation" x="135" y="-13.732394366197184"/>
         </scene>
     </scenes>
     <resources>

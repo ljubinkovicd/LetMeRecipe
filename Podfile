@@ -8,6 +8,7 @@ target 'LetMeRecipe' do
   # Pods for LetMeRecipe
   pod 'Alamofire', '~> 4.5'
   pod 'AlamofireImage', '~> 3.3'
+  pod 'ASHorizontalScrollView', '~> 1.5.1'
 
   target 'LetMeRecipeTests' do
     inherit! :search_paths

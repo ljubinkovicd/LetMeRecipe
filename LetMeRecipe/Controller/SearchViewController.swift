@@ -26,6 +26,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     var searchRecipeResults: [Recipe] = []
     var hasSearched: Bool = false
@@ -35,16 +36,31 @@ class SearchViewController: UIViewController {
         return .lightContent
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
+    }
+    
     override func viewDidLoad() {
         // TODO: Change this
         // This tells the table view to add a 56-point margin at the top, made up of 20 points for the status bar and 44 points for the Search Bar.
-        collectionView.contentInset = UIEdgeInsetsMake(56, 0, 0, 0)
+        collectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0)
         
         searchBar.becomeFirstResponder()
         
         //        let width = (collectionView!.frame.width / 3) - 5
         //        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         //        layout.itemSize = CGSize(width: width, height: 200)
+    }
+    
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        print("Segment changed: \(sender.selectedSegmentIndex)")
+        performSearch()
     }
     
     // MARK: - Custom methods
@@ -62,15 +78,22 @@ class SearchViewController: UIViewController {
     }
     
     // IZ KNJIGE
-    //    func iTunesURL(searchText: String) -> URL {
-    //    let escapedSearchText = searchText.addingPercentEncoding(
-    //        withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-    //        let urlString = String(format:
-    //            "https://itunes.apple.com/search?term=%@", searchText)
-    //        let url = URL(string: urlString)
-    //        return url!
-    //
-    //    }
+    func edamamURL(searchText: String, category: Int) -> URL {
+        let dietType: String
+        switch category {
+            case 1: dietType = "high-fiber"
+            case 2: dietType = "low-fat"
+            case 3: dietType = "low-carb"
+            default: dietType = "high-protein"
+        }
+        
+        let escapedSearchText = searchText.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        let urlString = String(format:
+            "https://api.edamam.com/search?q=%@&app_id=\(ApiKeys.appId)&app_key=\(ApiKeys.appKey)&diet=%@", escapedSearchText, dietType)
+        let url = URL(string: urlString)
+        
+        return url!
+    }
     //
     //
     //    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -120,43 +143,54 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("The search text is: '\(searchBar.text!)'")
-        
-        hasSearched = true
-        startLoading()
-        
-        // No longer listen to keyboard input
-        searchBar.resignFirstResponder()
-        
-        let myRequest = "https://api.edamam.com/search?q=\(searchBar.text!)&app_id=\(ApiKeys.appId)&app_key=\(ApiKeys.appKey)"
-        
-        Alamofire.request(myRequest).responseObject { (response: DataResponse<RecipeList>) in
-            
-            self.searchRecipeResults = []
-            
-            if let recipes = response.result.value {
-                
-                if recipes.recipeMetaData.count != 0 {
-                    for i in 0..<recipes.recipeMetaData.count {
-                        self.searchRecipeResults.append(recipes.recipeMetaData[i].recipe)
-                    }
-                } else {
-                    print("Nothing found: \(self.searchRecipeResults.count)")
-                }
-            }
-
-            // Ascending by calories
-            self.searchRecipeResults.sort(by: { ($0.calories < $1.calories) })
-        
-            DispatchQueue.main.async {
-                self.stopLoading()
-                self.collectionView.reloadData()
-            }
-        }
+    
+        performSearch()
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
+    }
+    
+    // MARK: - Custom methods
+    func performSearch() {
+        if !searchBar.text!.isEmpty {
+            print("The search text is: '\(searchBar.text!)'")
+            
+            hasSearched = true
+            startLoading()
+            
+            // No longer listen to keyboard input
+            searchBar.resignFirstResponder()
+            
+//            let myRequest = "https://api.edamam.com/search?q=\(searchBar.text!)&app_id=\(ApiKeys.appId)&app_key=\(ApiKeys.appKey)"
+            let myRequest = edamamURL(searchText: searchBar.text!, category: segmentedControl.selectedSegmentIndex)
+            
+            print(myRequest)
+            
+            Alamofire.request(myRequest).responseObject { (response: DataResponse<RecipeList>) in
+                
+                self.searchRecipeResults = []
+                
+                if let recipes = response.result.value {
+                    
+                    if recipes.recipeMetaData.count != 0 {
+                        for i in 0..<recipes.recipeMetaData.count {
+                            self.searchRecipeResults.append(recipes.recipeMetaData[i].recipe)
+                        }
+                    } else {
+                        print("Nothing found: \(self.searchRecipeResults.count)")
+                    }
+                }
+                
+                // Ascending by calories
+                self.searchRecipeResults.sort(by: { ($0.calories < $1.calories) })
+                
+                DispatchQueue.main.async {
+                    self.stopLoading()
+                    self.collectionView.reloadData()
+                }
+            }
+        }
     }
 }
 
@@ -209,7 +243,7 @@ extension SearchViewController: UICollectionViewDataSource {
                     withURL: url!,
                     placeholderImage: placeholderImage,
                     filter: filter,
-                    imageTransition: .flipFromTop(0.8)
+                    imageTransition: .crossDissolve(0.8)
                 )
             })
         }
@@ -220,14 +254,16 @@ extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected item: \(indexPath.row)")
         
-        
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let myVc = segue.destination as! UINavigationController
-        let vc = myVc.topViewController as! RecipeDetailController
+//        let myVc = segue.destination as! UINavigationController
+//        let vc = myVc.topViewController as! RecipeDetailController
+        
+        let vc = segue.destination as! RecipeDetailController
         
         if let cell = sender as? RecipeCell,
             let indexPath = self.collectionView.indexPath(for: cell) {

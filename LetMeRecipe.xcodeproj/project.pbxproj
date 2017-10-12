@@ -129,6 +129,16 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		0F5974371F8FCEFC0078B554 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0FCD2C541F8DC9E100394147 /* RecipeCell.swift */,
+				0FB6CB131F8E9E2C00BD7BB8 /* NothingFoundCell.swift */,
+				0FB6CB151F8E9E3700BD7BB8 /* LoadingCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0F71E0CC1F8D41EB003D9128 = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +164,7 @@
 		0F71E0D71F8D41EB003D9128 /* LetMeRecipe */ = {
 			isa = PBXGroup;
 			children = (
+				0F5974371F8FCEFC0078B554 /* View */,
 				0F2FD1421F8DD2A700E3202D /* Helper */,
 				0FCD2C511F8DB04200394147 /* Layout */,
 				0FCD2C4E1F8DAF7400394147 /* Controller */,
@@ -207,9 +218,6 @@
 		0FCD2C511F8DB04200394147 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				0FCD2C541F8DC9E100394147 /* RecipeCell.swift */,
-				0FB6CB131F8E9E2C00BD7BB8 /* NothingFoundCell.swift */,
-				0FB6CB151F8E9E3700BD7BB8 /* LoadingCell.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";

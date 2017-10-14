@@ -121,7 +121,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.0" green="0.84061285620000004" blue="0.61379860770000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.078431372549019607" green="0.62745098039215685" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="dtX-ld-GvF" firstAttribute="top" secondItem="VyG-0O-hea" secondAttribute="bottom" constant="2" id="1QA-Xv-mGd"/>
                                                         <constraint firstItem="jcw-9G-R8T" firstAttribute="top" secondItem="dtX-ld-GvF" secondAttribute="bottom" constant="2" id="1fe-oM-uNp"/>
@@ -170,7 +170,7 @@
                                             <outlet property="recipeImageView" destination="1Kz-XM-uoR" id="2fc-8C-ukF"/>
                                             <outlet property="recipeSourceLabel" destination="jcw-9G-R8T" id="eBT-Nc-q1k"/>
                                             <outlet property="recipeTitleLabel" destination="J8I-d7-7fQ" id="X8y-jl-9Gf"/>
-                                            <segue destination="GC5-mC-il8" kind="show" id="pzH-Id-L4i"/>
+                                            <segue destination="GC5-mC-il8" kind="show" id="ydI-Mq-MKw"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -209,7 +209,7 @@
                                 </items>
                             </navigationBar>
                             <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="tUp-Hl-sJE">
-                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <rect key="frame" x="141.5" y="265.5" width="37" height="37"/>
                                 <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                         </subviews>
@@ -250,35 +250,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05r-1B-neK">
-                                <rect key="frame" x="126" y="518" width="68" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Web View"/>
-                                <connections>
-                                    <action selector="initiateWebView:" destination="GC5-mC-il8" eventType="touchUpInside" id="gMt-Y4-mpG"/>
-                                    <segue destination="EF5-gZ-ZHG" kind="show" id="8ha-X1-H7S"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholderImg" translatesAutoresizingMaskIntoConstraints="NO" id="zls-ZN-4mE">
-                                <rect key="frame" x="16" y="72" width="288" height="210"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0gg-Ki-tZZ">
-                                <rect key="frame" x="0.0" y="290" width="320" height="220"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgf-Ol-qHJ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaE-Dc-ERM">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="504" id="Non-Ob-NUx"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ZaE-Dc-ERM" secondAttribute="bottom" id="Cfi-Bw-m2c"/>
+                                    <constraint firstItem="ZaE-Dc-ERM" firstAttribute="top" secondItem="bgf-Ol-qHJ" secondAttribute="top" id="LJz-xh-Jn9"/>
+                                    <constraint firstItem="ZaE-Dc-ERM" firstAttribute="leading" secondItem="bgf-Ol-qHJ" secondAttribute="leading" id="M8e-Bi-yEK"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZaE-Dc-ERM" secondAttribute="trailing" id="S6D-aR-BJ8"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bgf-Ol-qHJ" firstAttribute="bottom" secondItem="GBI-2v-Fdx" secondAttribute="bottom" id="4MI-jn-wKv"/>
+                            <constraint firstItem="bgf-Ol-qHJ" firstAttribute="leading" secondItem="GBI-2v-Fdx" secondAttribute="leading" id="4Tu-xE-xG5"/>
+                            <constraint firstItem="ZaE-Dc-ERM" firstAttribute="width" secondItem="Ga1-nw-PSG" secondAttribute="width" id="DRx-il-M2g"/>
+                            <constraint firstItem="bgf-Ol-qHJ" firstAttribute="top" secondItem="GBI-2v-Fdx" secondAttribute="top" id="Ldy-rd-iLr"/>
+                            <constraint firstItem="ZaE-Dc-ERM" firstAttribute="height" secondItem="Ga1-nw-PSG" secondAttribute="height" priority="250" id="lPR-A4-Ot7"/>
+                            <constraint firstItem="bgf-Ol-qHJ" firstAttribute="trailing" secondItem="GBI-2v-Fdx" secondAttribute="trailing" id="mRl-nj-9in"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="GBI-2v-Fdx"/>
                     </view>
                     <navigationItem key="navigationItem" id="tLh-Pb-JIK"/>
                     <connections>
-                        <outlet property="recipeDetailsLabel" destination="0gg-Ki-tZZ" id="rqb-oS-fiG"/>
-                        <outlet property="recipeImageView" destination="zls-ZN-4mE" id="CNl-Dn-u3h"/>
+                        <outlet property="containerView" destination="ZaE-Dc-ERM" id="gY6-8D-E3w"/>
+                        <outlet property="scrollView" destination="bgf-Ol-qHJ" id="f2l-kn-rr2"/>
+                        <segue destination="EF5-gZ-ZHG" kind="show" identifier="toWebViewSegue" id="b6P-bN-JVy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s7K-I8-EaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -304,7 +310,4 @@
             <point key="canvasLocation" x="135" y="-13.732394366197184"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="placeholderImg" width="200" height="200"/>
-    </resources>
 </document>

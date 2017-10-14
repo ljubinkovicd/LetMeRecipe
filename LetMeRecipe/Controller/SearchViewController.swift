@@ -32,6 +32,8 @@ class SearchViewController: UIViewController {
     var hasSearched: Bool = false
     var isLoading: Bool = false
     
+    private var filteredRecipes: [Recipe] = []
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -47,6 +49,8 @@ class SearchViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         // TODO: Change this
         // This tells the table view to add a 56-point margin at the top, made up of 20 points for the status bar and 44 points for the Search Bar.
         collectionView.backgroundColor = .clear
@@ -57,8 +61,8 @@ class SearchViewController: UIViewController {
         let bookmarkImage = UIImage(named: "filter")
         searchBar.setImage(bookmarkImage, for: .bookmark, state: UIControlState())
         
-        searchBar.barTintColor = UIColor.black
-        searchBar.backgroundColor = UIColor.black
+//        searchBar.barTintColor = UIColor.black
+//        searchBar.backgroundColor = UIColor.black
         
         searchBar.becomeFirstResponder()
         
@@ -70,6 +74,24 @@ class SearchViewController: UIViewController {
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         print("Segment changed: \(sender.selectedSegmentIndex)")
         performSearch()
+        
+//        let dietType: String
+//        switch sender.selectedSegmentIndex {
+//            case 1: dietType = "high-fiber"
+//            case 2: dietType = "low-fat"
+//            case 3: dietType = "low-carb"
+//            default: dietType = "high-protein"
+//        }
+//
+//        let searchText = searchBar.text ?? ""
+//
+//        filteredRecipes = searchRecipeResults.filter({ recipe in
+//            let isMatchingSearchText = recipe.dietLabel.constainsString(searchText.lowercased()) || searchText.lowercased().characters.count == 0
+//
+//            return isMatchingSearchText
+//        })
+//
+//        collectionView.reloadData()
     }
     
     // MARK: - Custom methods

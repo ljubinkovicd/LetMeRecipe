@@ -166,7 +166,6 @@
 			children = (
 				0F5974371F8FCEFC0078B554 /* View */,
 				0F2FD1421F8DD2A700E3202D /* Helper */,
-				0FCD2C511F8DB04200394147 /* Layout */,
 				0FCD2C4E1F8DAF7400394147 /* Controller */,
 				0FCD2C4D1F8DAD3D00394147 /* Model */,
 				0F71E0D81F8D41EB003D9128 /* AppDelegate.swift */,
@@ -213,13 +212,6 @@
 				0F5572521F8E6DE4004CD225 /* RecipeWebView.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		0FCD2C511F8DB04200394147 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Layout;
 			sourceTree = "<group>";
 		};
 		E8A8CE96FA27C2110F2F55A8 /* Frameworks */ = {

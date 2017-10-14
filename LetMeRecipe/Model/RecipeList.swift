@@ -92,6 +92,7 @@ final class Recipe: ResponseObjectSerializable, CustomStringConvertible {
     var calories: Float // calories
     var source: String // source
     var ingredients: [Ingredient] // ingredients
+    var ingredientLines: [String] // ingredientLines
     
     init?(response: HTTPURLResponse, representation: Any) {
         
@@ -102,6 +103,7 @@ final class Recipe: ResponseObjectSerializable, CustomStringConvertible {
         let calories = representation["calories"] as! Float
         let source = representation["source"] as! String
         let ingredients = Ingredient.collection(from: response, withRepresentation: representation["ingredients"]!)
+        let ingredientLines = representation["ingredientLines"] as! [String]
         
         self.title = title
         self.mealImgUrl = mealImgUrl
@@ -109,6 +111,7 @@ final class Recipe: ResponseObjectSerializable, CustomStringConvertible {
         self.calories = calories
         self.source = source
         self.ingredients = ingredients
+        self.ingredientLines = ingredientLines
     }
     
     var description: String {
@@ -133,9 +136,6 @@ final class Ingredient: ResponseObjectSerializable, ResponseCollectionSerializab
     }
     
     var description: String {
-        return "Ingredient: { text: \(text), weight: \(weight) }"
+        return " \(text), weight: \(weight) }"
     }
 }
-
-
-
